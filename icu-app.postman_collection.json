@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "e4588879-c5c8-47ee-9978-55255018d363",
+		"name": "ICU App API",
+		"description": "Collection for ICU REST API Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search Pasien",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/search?KODE_REG=REG001",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "KODE_REG",
+							"value": "REG001",
+							"description": "Registration Code"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Result",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"patient\": {\n        \"pid\": \"12345\",\n        \"name\": \"John Doe\",\n        \"gender\": \"L\"\n    },\n    \"result\": {\n        \"heart_rate\": 80,\n        \"blood_pressure\": \"120/80\",\n        \"temperature\": 36.5\n    }\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/log?limit=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"log"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "date",
+							"value": "2024-01-29",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:9078",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "!PkuJogja2026*",
+			"type": "string"
+		}
+	]
+}

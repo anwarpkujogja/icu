@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS app_logs;
+DROP TABLE IF EXISTS hasil_lab;
+DROP TABLE IF EXISTS kunjungan;
+DROP TABLE IF EXISTS pasiens;

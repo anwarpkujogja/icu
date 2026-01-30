@@ -1,0 +1,43 @@
+
+
+services:
+  app:
+    build: .
+    container_name: icu-app-container
+    ports:
+      - "9078:9078"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=secret
+      - DB_NAME=icu_db
+      - APP_PORT=9078
+      - APP_API_TOKEN=!PkuJogja2026*
+    depends_on:
+      - db
+    networks:
+      - icu-network
+
+  db:
+    image: postgres:13-alpine
+    container_name: icu-db-container
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=icu_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Optional: Init script if we want to auto-create schema
+      - ./etc/migrations/000001_init_schema.up.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - icu-network
+
+volumes:
+  pgdata:
+
+networks:
+  icu-network:
+    driver: bridge
